@@ -1,3 +1,4 @@
+import sys
 import functools
 import logging
 import threading
@@ -10,6 +11,10 @@ from .writer import AgentWriter
 
 log = logging.getLogger(__name__)
 
+PY_35 = sys.version_info >= (3, 5)
+
+if PY_35:
+    from .buffer import TaskLocalSpanBuffer
 
 class Tracer(object):
     """ Tracer is used to create, sample and submit spans that measure the
@@ -40,7 +45,10 @@ class Tracer(object):
         self._spans = []
 
         # track the active span
-        self.span_buffer = ThreadLocalSpanBuffer()
+        if PY_35:
+            self.span_buffer = TaskLocalSpanBuffer()
+        else:
+            self.span_buffer = ThreadLocalSpanBuffer()
 
         # A hook for local debugging. shouldn't be needed or used
         # in production.

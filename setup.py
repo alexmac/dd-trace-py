@@ -48,7 +48,7 @@ if os.environ.get('VERSION_SUFFIX'):
     )
 
 setup(
-    name='ddtrace',
+    name='ddtrace_asyncio',
     version=version,
     description='Datadog tracing code',
     url='https://github.com/DataDog/dd-trace-py',
