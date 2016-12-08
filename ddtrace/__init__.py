@@ -4,7 +4,7 @@ from .pin import Pin
 from .span import Span
 from .tracer import Tracer
 
-__version__ = '0.4.2'
+__version__ = '10.5.0'
 
 # a global tracer instance
 tracer = Tracer()
